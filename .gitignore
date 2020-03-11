@@ -1,6 +1,6 @@
 .ipynb*
 model/
-.vscode/
+.vscode
 data/*
 .DS_Store
 .idea/
