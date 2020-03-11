@@ -1,0 +1,57 @@
+---
+- name: Check if anaconda is installed
+  stat:
+    path: '{{ conda_directory }}'
+  register: installed
+  become_user: ml
+
+- name: Check if anaconda is downloaded
+  stat:
+    path: /mnt/ml/cache/anaconda3.sh
+  register: downloaded
+  become_user: ml
+
+- name: Define conda variables
+  set_fact:
+    conda_url: "{{ 'https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-5.0.1-Linux-x86_64.sh' if china is defined else 'https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh' }}"
+
+- name: Download anaconda installer
+  get_url: 'url={{conda_url}} dest=/mnt/ml/cache/anaconda3.sh'
+  become_user: ml
+  when: downloaded.stat.exists == False
+
+- name: Copy condarc
+  template: src=condarc dest=~/.condarc
+  become_user: ml
+
+- name: Install anaconda3
+  shell: 'bash /mnt/ml/cache/anaconda3.sh -b -p {{ conda_directory }}'
+  become_user: ml
+  when: installed.stat.exists == False
+
+- name: Add anaconda3 to the PATH
+  lineinfile: dest=~/.bashrc line="export PATH={{ conda_directory }}/bin:$PATH"
+  become_user: ml
+
+- name: Update conda
+  shell: '{{ conda_directory }}/bin/conda update conda -y --force'
+  become_user: ml
+
+- name: Check if a py36 env is installed
+  stat:
+    path: '{{ conda_directory }}/envs/py36'
+  register: py36
+  become: false
+
+- name: Create anaconda python 3.6 env
+  shell: '{{ conda_directory }}/bin/conda create -y -n py36 python=3.6 anaconda'
+  become: false
+  when: py36.stat.exists == False
+
+- name: Upgrading setuptools
+  shell: '/usr/bin/yes | {{ conda_directory }}/envs/py36/bin/pip install -q --upgrade setuptools'
+  ignore_errors: yes
+  become: false
+  when: py36.stat.exists == False
+
+

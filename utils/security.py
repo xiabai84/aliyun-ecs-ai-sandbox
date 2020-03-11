@@ -17,7 +17,7 @@ from .select import BaseConfigParameterSelect
 
 
 class SecurityGroupsSelect(BaseConfigParameterSelect):
-    name = "安全组"
+    name = "SecurityGroup"
     key = ['CreateInstanceParams', 'SecurityGroupId']
     request_cls = DescribeSecurityGroupsRequest.DescribeSecurityGroupsRequest
     items_getter = lambda self, x: x['SecurityGroups']['SecurityGroup']

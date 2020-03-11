@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=no-value-for-parameter
+
 from datetime import datetime, timedelta
 
 from tabulate import tabulate

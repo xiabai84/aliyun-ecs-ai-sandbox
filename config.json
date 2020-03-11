@@ -1,0 +1,19 @@
+{
+    "RegionId": "eu-central-1",
+    "CreateInstanceParams": {
+        "InstanceType": "ecs.gn5-c4g1.xlarge",
+        "ZoneId": "eu-central-1b",
+        "SecurityGroupId": "sg-gw88jklpjwa3pb2uamg3",
+        "VSwitchId": "vsw-gw8i23j6t7jw171gw061l",
+        "KeyPairName": "bai-mac",
+        "ImageId": "centos_7_7_x64_20G_alibase_20200220.vhd",
+        "InstanceName": "ecs-ml-workstation",
+        "InternetChargeType": "PayByTraffic",
+        "InternetMaxBandwidthOut": 25,
+        "InstanceChargeType": "PostPaid",
+        "Period": 1,
+        "PeriodUnit": "Hourly"
+    },
+    "DiskId": "d-gw88jklpjwa3nru5a9c0",
+    "InstanceId": "i-gw8dqmpeeas9qr2pbkmq"
+}

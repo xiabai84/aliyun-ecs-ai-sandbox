@@ -114,9 +114,7 @@ class Config(object):
         client = self.create_api_client()
         RegionIdSelect(self).show()
         InstanceTypeSelect(self).show()
-        msg = "Disks which is setup with ecs instance will also be deleted, after ecs is removed. In order to keep customer data \
-                it is recommend to mount a additional disk. You can select to create a new (n), use existing (e) or create \
-                a new one by taking from snapshot(s), [n/e/s]"
+        msg = "Disks which is setup with ecs instance will also be deleted, after ecs is removed. In order to keep customer data it is recommend to mount a additional disk. You can select to create a new (n), use existing (e) or create a new one by taking from snapshot(s), [n/e/s]"
         answer = click.prompt(msg).lower()
         if answer == 'n':
             ZonesSelect(self).show()

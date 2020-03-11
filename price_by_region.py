@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=no-value-for-parameter
 import concurrent.futures
 
 from tabulate import tabulate
