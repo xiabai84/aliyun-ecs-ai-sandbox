@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# pylint: disable=no-value-for-parameter
+
 from __future__ import absolute_import, print_function, unicode_literals
 import json
 import time
@@ -79,7 +81,7 @@ def allocate_public_ip(config):
     client = config.create_api_client()
     req = AllocatePublicIpAddressRequest.AllocatePublicIpAddressRequest()
     req.set_InstanceId(config.get('InstanceId'))
-    result = do_action(client, req)
+    do_action(client, req)
 
 
 def start_instance(config):
@@ -87,7 +89,7 @@ def start_instance(config):
     client = config.create_api_client()
     req = StartInstanceRequest.StartInstanceRequest()
     req.set_InstanceId(config.get('InstanceId'))
-    result = do_action(client, req)
+    do_action(client, req)
 
 def attach_disk(config):
     click.echo(click.style("attaching disks...", fg="green"))
@@ -95,7 +97,7 @@ def attach_disk(config):
     req = AttachDiskRequest.AttachDiskRequest()
     req.set_InstanceId(config.get('InstanceId'))
     req.set_DiskId(config.get('DiskId'))
-    result = do_action(client, req)
+    do_action(client, req)
 
 
 def save_instance_info(config):
