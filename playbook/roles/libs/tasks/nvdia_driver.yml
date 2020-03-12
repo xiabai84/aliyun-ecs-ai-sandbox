@@ -24,7 +24,7 @@
 
 # http://tleyden.github.io/blog/2014/10/25/cuda-6-dot-5-on-aws-gpu-instance-running-ubuntu-14-dot-04/
 - name: Install linux packages
-  apt: pkg=linux-image-extra-virtual state=installed
+  apt: pkg=linux-image-extra-virtual state=present
 
 - name: Restart server
   shell: sleep 2 && /sbin/shutdown -r now
@@ -36,7 +36,6 @@
   local_action:
     module: wait_for host={{ inventory_hostname }} port=22 delay=10 timeout=120 state=started
   become: false
-
 
 - name: Check if NVIDA drivers is downloaded
   stat:
@@ -50,5 +49,6 @@
     dest: /mnt/ml/cache/nvdia_driver.run
   when: downloaded.stat.exists == False
 
+# here need a register to check if NVIDIA driver is installed
 - name: Install the NVIDIA driver
   shell: sh /mnt/ml/cache/nvdia_driver.run -q -a -n -s

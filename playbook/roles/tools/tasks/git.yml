@@ -1,5 +1,5 @@
 - name: Install git
-  apt: pkg=git state=installed
+  apt: pkg=git state=present
 
 - name: Add git alias
   become: yes

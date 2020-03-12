@@ -33,6 +33,9 @@
   lineinfile: dest=~/.bashrc line="export PATH={{ conda_directory }}/bin:$PATH"
   become_user: ml
 
+# install tqdm
+# pip install tqdm
+
 - name: Update conda
   shell: '{{ conda_directory }}/bin/conda update conda -y --force'
   become_user: ml
@@ -47,6 +50,10 @@
   shell: '{{ conda_directory }}/bin/conda create -y -n py36 python=3.6 anaconda'
   become: false
   when: py36.stat.exists == False
+
+- name: debug py36
+  debug:
+    msg: " dubug----> {{ py36 }}"
 
 - name: Upgrading setuptools
   shell: '/usr/bin/yes | {{ conda_directory }}/envs/py36/bin/pip install -q --upgrade setuptools'
