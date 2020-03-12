@@ -70,7 +70,7 @@ class BaseConfigParameterSelect(object):
              for idx, item in enumerate(items)
         ]
         select_list = '\n'.join(color_text(lines))
-        formatted = 'Available {}:\n{}\nTake a {}Index. Or enter for refreshing menu'.format(
+        formatted = 'Available {}:\n{}\nSelect a Index for {}. Or just enter for refreshing menu'.format(
             self.name, select_list, self.name)
         return formatted
 

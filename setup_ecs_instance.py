@@ -34,7 +34,7 @@ def main(silent):
     config.save()
     should_create_new = True
     if config.get('InstanceId'):
-        answer = click.prompt("detected a config file, use this for setting up ecs instance (y), or create a new one(n)? [y/n]")
+        answer = click.prompt("Detected a config file, use this for setting up ecs instance (y), or create a new one(n)? [y/n]")
         if answer.lower() == 'y':
             should_create_new = False
     if should_create_new:
@@ -55,7 +55,7 @@ def main(silent):
 
 
 def create_instance(config):
-    click.echo(click.style("creating instance ...", fg="green"))
+    click.echo(click.style("Creating instance with following params ...", fg="green"))
     client = config.create_api_client()
     req = CreateInstanceRequest.CreateInstanceRequest()
 
@@ -81,23 +81,23 @@ def allocate_public_ip(config):
     client = config.create_api_client()
     req = AllocatePublicIpAddressRequest.AllocatePublicIpAddressRequest()
     req.set_InstanceId(config.get('InstanceId'))
-    do_action(client, req)
+    result = do_action(client, req)
 
 
 def start_instance(config):
-    click.echo(click.style("starting ecs instance ...", fg="green"))
+    click.echo(click.style("Starting ecs instance ...", fg="green"))
     client = config.create_api_client()
     req = StartInstanceRequest.StartInstanceRequest()
     req.set_InstanceId(config.get('InstanceId'))
-    do_action(client, req)
+    result = do_action(client, req)
 
 def attach_disk(config):
-    click.echo(click.style("attaching disks...", fg="green"))
+    click.echo(click.style("Attaching disks...", fg="green"))
     client = config.create_api_client()
     req = AttachDiskRequest.AttachDiskRequest()
     req.set_InstanceId(config.get('InstanceId'))
     req.set_DiskId(config.get('DiskId'))
-    do_action(client, req)
+    result = do_action(client, req)
 
 
 def save_instance_info(config):

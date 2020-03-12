@@ -1,4 +1,5 @@
 .ipynb*
+hosts
 model/
 .vscode
 data/*

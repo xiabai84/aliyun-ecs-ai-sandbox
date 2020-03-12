@@ -20,7 +20,7 @@ def main():
     stop_instance(config)
     wait_for_instance_status(config, "Stopped")
     delete_instance(config)
-    answer = click.prompt("do you want to make a snapshot, then delete disk for reducing cost? [y/n]")
+    answer = click.prompt("Do you want to make a snapshot, then delete disk for reducing cost? [y/n]")
     if answer == 'y':
         OldSnapshotId = config.get('SnapshotId')
         time.sleep(20)
@@ -34,7 +34,7 @@ def main():
 
 
 def stop_instance(config):
-    click.echo(click.style("stoping instance ...", fg="green"))
+    click.echo(click.style("Stoping instance ...", fg="green"))
     client = config.create_api_client()
     req = StopInstanceRequest.StopInstanceRequest()
     req.set_InstanceId(config.get('InstanceId'))
@@ -42,11 +42,12 @@ def stop_instance(config):
 
 
 def delete_instance(config):
-    click.echo(click.style("deleting instance ...", fg="green"))
+    click.echo(click.style("Deleting instance ...", fg="green"))
     client = config.create_api_client()
     req = DeleteInstanceRequest.DeleteInstanceRequest()
     req.set_InstanceId(config.get('InstanceId'))
     result = do_action(client, req)
+
 
 def create_snapshot(config):
     client = config.create_api_client()
@@ -56,11 +57,13 @@ def create_snapshot(config):
     SnapshotId= result['SnapshotId']
     config.set('SnapshotId', SnapshotId)
 
+
 def delete_snapshot(config, snapshot_id):
     client = config.create_api_client()
     request = DeleteSnapshotRequest.DeleteSnapshotRequest()
     request.set_SnapshotId(snapshot_id)
     do_action(client, request)
+
 
 def delete_disk(config):
     client = config.create_api_client()
@@ -70,12 +73,11 @@ def delete_disk(config):
     config.pop("DiskId")
 
 
-
-
 def cleanup(config):
-    click.echo(click.style("updating config file ...", fg="green"))
+    click.echo(click.style("Updating config file ...", fg="green"))
     config.pop("InstanceId")
     config.save()
+
 
 if __name__ == '__main__':
     main()
