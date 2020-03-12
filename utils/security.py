@@ -109,7 +109,7 @@ class SecurityGroupsSelect(BaseConfigParameterSelect):
 
     def create_vpc(self):
         request = CreateVpcRequest.CreateVpcRequest()
-        request.set_VpcName('ems-ml-auto-vpc')
+        request.set_VpcName('ecs-ml-auto-vpc')
         request.set_CidrBlock('192.168.0.0/16')
         result = do_action(self.client, request)
         self.VpcId = result['VpcId']
