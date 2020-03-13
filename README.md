@@ -25,11 +25,14 @@ mkvirtualenv ali-cloud
 pip install -r requirements.txt
 ```
 2. Setup basic configurations in Alibaba Cloud
+
 For remote access, you must generate ALIYUN_ACCESS_KEY_ID and ALIYUN_ACCESS_KEY_SECRET for your account. 
 See: https://www.alibabacloud.com/help/doc-detail/142101.htm
 
 3. Create ECS instance
+
 Start init python script to create instance:
+
 ```
 python setup_ecs_instance.py
 ```
@@ -82,6 +85,7 @@ This python program will also generate or overwrite config.json, which stores in
 ### Setup your data science workbench with ansible-playbook
 My requirements.txt file contains ansible dependency, which means you can use command-line-tool ansible-playbook directly...
 1. Checking if ECS instance already exists
+
 ```
 ansible all -m ping
 ```
@@ -89,14 +93,18 @@ ansible all -m ping
 ```
 ansible-playbook ecs-gpu-instance.yml
 ```
+
 ### Start jupyter notebook
 Once your ansible-playbook finished, you should do following steps to start jupyter server:
+
 Login with 
+
 ```
 ssh ml@(your ip)
 
 ml@iZgw89wtwllnq3g945jw7iZ:~/.jupyter$ jupyter notebook --certfile=mycert.pem --keyfile mykey.key
 ```
+
 ### Extra
 After running nvidia_driver playbook, please login in your remote ECS instance by using **ssh ml@{ your ip address }** and verify driver installation via ```nvidia-smi``` command.
 <br>
