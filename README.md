@@ -2,20 +2,15 @@
 
 This is a automation script for building machine learning dev-environment on alibaba cloud.<br>
 
-I use python for creating ECS instance and then install nvidia drivers, libs for deep learning with GPU support via  ansible-playbook.
-<br>
-This guide assumes you're usuing ubuntu 18.04. The playbook may need some editing if you're using other versions of ubuntu or linux...
-<br>
-After running nvidia_driver playbook, please login in your remote ECS instance by using "ssh ml@{ your ip address }" and verify driver installation via nvidia-smi.
+I use python for creating ECS instance and then install nvidia drivers, libs for deep learning with GPU support via  ansible-playbook. This guide assumes you're usuing ubuntu 18.04. The playbook may need some editing if you're using other versions of ubuntu or linux... After running nvidia_driver playbook, please login in your remote ECS instance by using "ssh ml@{ your ip address }" and verify driver installation via nvidia-smi.
 <br>
 For example I choosed ecs.gn5-c4g1.xlarge from catalog, which has 1 * NVIDIA P-100 GPU processor and 1 * 16 GB GPU memory:
-<br>
+```
 ml@iZgw8hlwkk3wtun2uxt6pjZ:~$ nvidia-smi
-<br>
-
+```
 Specially for installing nvidia driver see: https://github.com/NVIDIA/ansible-role-nvidia-driver
 
-## Current Deep Learning libraries
+### Current Deep Learning libraries
 
 * tensorflow 2.1, 
 * tensorboard
@@ -24,7 +19,7 @@ Specially for installing nvidia driver see: https://github.com/NVIDIA/ansible-ro
 * jupyter
 * cuda 10.2
 
-## HandsOn - Setup EMS instance
+### HandsOn - Setup EMS instance
 1. Install python3 dependencies
 Assume you already have virtualenvwrapper on your local computer
 ```
@@ -60,7 +55,7 @@ python setup_ecs_instance.py
 
 * For the rest just use default value
 
-### Once it finished, you will see following message:
+#### Once it finished, you will see following message:
 ```
     Creating instance with following params ...
     Region-ID: eu-central-1
@@ -86,14 +81,17 @@ python setup_ecs_instance.py
 ### Check config.json file
 This python program will also generate or overwrite config.json, which stores informations for recreating instance. And it will also write the instance public ip address in "hosts" file (under playbook directory). ansible-playbook will use it to deploy everything you need automatically in your remote ECS instance.
 
-# Setup your data science workbench with ansible-playbook
+### Setup your data science workbench with ansible-playbook
 My requirements.txt file contains ansible dependency, which means you can use command-line-tool ansible-playbook directly...
 1. Checking if ECS instance already exists
+```
 ansible all -m ping
+```
 2. Install deep learning libraries
+```
 ansible-playbook ecs-gpu-instance.yml
-
-# Start jupyter notebook
+```
+## Start jupyter notebook
 Once your ansible-playbook finished, you should do following steps to start jupyter server:
 Login with 
 ```
