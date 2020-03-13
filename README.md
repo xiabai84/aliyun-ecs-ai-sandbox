@@ -1,6 +1,6 @@
 # aliyun-ecs-ai-sandbox
 
-This is a automation script for building machine learning dev-environment on alibaba cloud.<br>
+This is a automation script for building machine learning dev-environment on Alibaba Cloud, which is hosted in german region (Frankfurt am Main) by default<br>
 
 I use python for creating ECS instance and then install nvidia drivers, libs for deep learning with GPU support via  ansible-playbook. This guide assumes you're usuing ubuntu 18.04. The playbook may need some editing if you're using other versions of ubuntu or linux... 
 
