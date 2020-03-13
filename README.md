@@ -1,10 +1,11 @@
 # aliyun-ecs-ai-sandbox
 
-This is a automation script for building machine learning dev-environment on Alibaba Cloud, which is hosted in german region (Frankfurt am Main) by default<br>
+This is a automation script for building machine learning dev-environment on Alibaba Cloud, which is hosted in german region (Frankfurt am Main) by default setting.<br>
 
-I use python for creating ECS instance and then install nvidia drivers, libs for deep learning with GPU support via  ansible-playbook. This guide assumes you're usuing ubuntu 18.04. The playbook may need some editing if you're using other versions of ubuntu or linux... 
+I use python for creating ECS instance. There is a ansible-playbook for installing nvidia drivers, libs for deep learning with GPU support. This guide assumes you will use ubuntu 18.04, the playbook may need some editing if you're using other versions of ubuntu or linux... 
 
 ### Deep Learning libraries
+
 This script contains the newest version of tensorflow and pytorch.
 
 * tensorflow 2.1, 
@@ -14,11 +15,11 @@ This script contains the newest version of tensorflow and pytorch.
 * jupyter
 * cuda 10.2
 
-It also provide a https user web interface by using jupyter server. You can access this development environment via https://< your public ip>:888
+It also provide a https user web interface by using jupyter server. You can access this development environment via https://< your public ip>:8888
 
 ### HandsOn - Setup EMS instance
 1. Install python3 dependencies
-Assume you already have virtualenvwrapper on your local computer
+Assume you already have virtualenvwrapper on your local machine.(https://virtualenvwrapper.readthedocs.io/en/latest/)
 ```
 mkvirtualenv ali-cloud
 pip install -r requirements.txt
