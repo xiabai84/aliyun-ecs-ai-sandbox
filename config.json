@@ -6,7 +6,7 @@
         "SecurityGroupId": "sg-gw8alvxt2sx31q2mevgp",
         "VSwitchId": "vsw-gw89k0nqx9bx4xv9htc0d",
         "KeyPairName": "bai-mac",
-        "ImageId": "ubuntu_14_0405_64_20G_alibase_20170824.vhd",
+        "ImageId": "ubuntu_18_04_x64_20G_alibase_20200220.vhd",
         "InstanceName": "ecs-ml-workstation",
         "InternetChargeType": "PayByTraffic",
         "InternetMaxBandwidthOut": 25,
@@ -14,5 +14,6 @@
         "Period": 1,
         "PeriodUnit": "Hourly"
     },
-    "DiskId": "d-gw82uzx21p96wzhm4k8j"
+    "DiskId": "d-gw89wtwllnq3fvb0htxr",
+    "InstanceId": "i-gw89wtwllnq3huc1thqs"
 }

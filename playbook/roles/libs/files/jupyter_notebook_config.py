@@ -4,7 +4,8 @@ c.NotebookApp.keyfile = u'/home/ml/.jupyter/mykey.key'
 # Set ip to '*' to bind on all interfaces (ips) for the public server
 c.NotebookApp.ip = '*'
 # Important: Remember to change your password hash !!!
-c.NotebookApp.password = u'sha1:2c1ce8eea64a:a30ebafd95a8d523783ef233b1a89e83951b36aa'
+# password -> test123
+c.NotebookApp.password = u'sha1:f47ed769c548:b04ccb624ed4c5cbda4095070cbef44bdb732e79'
 c.NotebookApp.open_browser = False
 c.NotebookApp.notebook_dir = '/mnt/ml/working'
 

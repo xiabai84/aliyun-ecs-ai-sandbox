@@ -1,42 +1,34 @@
 ---
-- name: Check if anaconda is installed
+- name: Check if Miniconda is installed
   stat:
     path: '{{ conda_directory }}'
   register: installed
   become_user: ml
 
-- name: Check if anaconda is downloaded
+- name: Check if Miniconda is downloaded
   stat:
-    path: /mnt/ml/cache/anaconda3.sh
+    path: /mnt/ml/cache/conda3.sh
   register: downloaded
   become_user: ml
 
-- name: Define conda variables
-  set_fact:
-    conda_url: "{{ 'https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-5.0.1-Linux-x86_64.sh' if china is defined else 'https://repo.continuum.io/archive/Anaconda3-5.0.1-Linux-x86_64.sh' }}"
-
-- name: Download anaconda installer
-  get_url: 'url={{conda_url}} dest=/mnt/ml/cache/anaconda3.sh'
+- name: Download Miniconda3 installer
+  get_url: 
+    url: https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    dest: /mnt/ml/cache/conda3.sh
+    checksum: sha256:957d2f0f0701c3d1335e3b39f235d197837ad69a944fa6f5d8ad2c686b69df3b
   become_user: ml
   when: downloaded.stat.exists == False
 
-- name: Copy condarc
-  template: src=condarc dest=~/.condarc
-  become_user: ml
-
-- name: Install anaconda3
-  shell: 'bash /mnt/ml/cache/anaconda3.sh -b -p {{ conda_directory }}'
+- name: Install Miniconda3
+  shell: 'bash /mnt/ml/cache/conda3.sh -b -p {{ conda_directory }}'
   become_user: ml
   when: installed.stat.exists == False
 
-- name: Add anaconda3 to the PATH
+- name: Add Miniconda3 to the PATH
   lineinfile: dest=~/.bashrc line="export PATH={{ conda_directory }}/bin:$PATH"
   become_user: ml
 
-# install tqdm
-# pip install tqdm
-
-- name: Update conda
+- name: Update Miniconda3b
   shell: '{{ conda_directory }}/bin/conda update conda -y --force'
   become_user: ml
 
@@ -46,19 +38,13 @@
   register: py36
   become: false
 
-- name: Create anaconda python 3.6 env
+- name: Create Miniconda3 python 3.6 env
   shell: '{{ conda_directory }}/bin/conda create -y -n py36 python=3.6 anaconda'
   become: false
   when: py36.stat.exists == False
-
-- name: debug py36
-  debug:
-    msg: " dubug----> {{ py36 }}"
 
 - name: Upgrading setuptools
   shell: '/usr/bin/yes | {{ conda_directory }}/envs/py36/bin/pip install -q --upgrade setuptools'
   ignore_errors: yes
   become: false
   when: py36.stat.exists == False
-
-
