@@ -91,7 +91,7 @@ ansible all -m ping
 ```
 ansible-playbook ecs-gpu-instance.yml
 ```
-## Start jupyter notebook
+### Start jupyter notebook
 Once your ansible-playbook finished, you should do following steps to start jupyter server:
 Login with 
 ```
