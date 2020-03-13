@@ -14,6 +14,5 @@
         "Period": 1,
         "PeriodUnit": "Hourly"
     },
-    "DiskId": "d-gw89wtwllnq3fvb0htxr",
-    "InstanceId": "i-gw89wtwllnq3huc1thqs"
+    "DiskId": "d-gw89wtwllnq3fvb0htxr"
 }

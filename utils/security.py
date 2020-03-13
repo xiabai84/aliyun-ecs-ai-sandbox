@@ -60,7 +60,7 @@ class SecurityGroupsSelect(BaseConfigParameterSelect):
         # Adding SecurityGroup for Jupyter Notebook
         request = AuthorizeSecurityGroupRequest.AuthorizeSecurityGroupRequest()
         request.set_IpProtocol("tcp")
-        request.set_PortRange("8880/8888")
+        request.set_PortRange("8888/8888")
         request.set_SecurityGroupId(self.SecurityGroupId)
         request.set_SourceCidrIp('0.0.0.0/0')
         result = do_action(self.client, request)
