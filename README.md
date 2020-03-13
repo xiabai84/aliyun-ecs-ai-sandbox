@@ -2,13 +2,7 @@
 
 This is a automation script for building machine learning dev-environment on alibaba cloud.<br>
 
-I use python for creating ECS instance and then install nvidia drivers, libs for deep learning with GPU support via  ansible-playbook. This guide assumes you're usuing ubuntu 18.04. The playbook may need some editing if you're using other versions of ubuntu or linux... After running nvidia_driver playbook, please login in your remote ECS instance by using "ssh ml@{ your ip address }" and verify driver installation via nvidia-smi.
-<br>
-For example I choosed ecs.gn5-c4g1.xlarge from catalog, which has 1 * NVIDIA P-100 GPU processor and 1 * 16 GB GPU memory:
-```
-ml@iZgw8hlwkk3wtun2uxt6pjZ:~$ nvidia-smi
-```
-Specially for installing nvidia driver see: https://github.com/NVIDIA/ansible-role-nvidia-driver
+I use python for creating ECS instance and then install nvidia drivers, libs for deep learning with GPU support via  ansible-playbook. This guide assumes you're usuing ubuntu 18.04. The playbook may need some editing if you're using other versions of ubuntu or linux... 
 
 ### Current Deep Learning libraries
 
@@ -99,3 +93,11 @@ ssh ml@(your ip)
 
 ml@iZgw89wtwllnq3g945jw7iZ:~/.jupyter$ jupyter notebook --certfile=mycert.pem --keyfile mykey.key
 ```
+### Extra
+After running nvidia_driver playbook, please login in your remote ECS instance by using **ssh ml@{ your ip address }** and verify driver installation via ```nvidia-smi``` command.
+<br>
+For example I choosed **cs.gn5-c4g1.xlarge** from catalog, which has **1 * NVIDIA P-100 GPU** processor and **1 * 16 GB GPU** memory:
+```
+ml@iZgw8hlwkk3wtun2uxt6pjZ:~$ nvidia-smi
+```
+Specially for installing nvidia driver see: https://github.com/NVIDIA/ansible-role-nvidia-driver
