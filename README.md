@@ -22,6 +22,7 @@ It also provide a https user web interface by using jupyter server. You can acce
 Assume you already have virtualenvwrapper on your local machine.(https://virtualenvwrapper.readthedocs.io/en/latest/)
 ```
 mkvirtualenv ali-cloud
+workon ali-cloud
 pip install -r requirements.txt
 ```
 2. Setup basic configurations in Alibaba Cloud
