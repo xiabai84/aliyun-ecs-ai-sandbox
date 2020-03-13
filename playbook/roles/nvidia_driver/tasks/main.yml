@@ -1,0 +1,2 @@
+---
+ - { import_tasks: nvidia_drivers.yaml, tags: 'nvidia_drivers' }
