@@ -4,7 +4,8 @@ This is a automation script for building machine learning dev-environment on ali
 
 I use python for creating ECS instance and then install nvidia drivers, libs for deep learning with GPU support via  ansible-playbook. This guide assumes you're usuing ubuntu 18.04. The playbook may need some editing if you're using other versions of ubuntu or linux... 
 
-### Current Deep Learning libraries
+### Deep Learning libraries
+This script contains the newest version of tensorflow and pytorch.
 
 * tensorflow 2.1, 
 * tensorboard
@@ -12,6 +13,8 @@ I use python for creating ECS instance and then install nvidia drivers, libs for
 * torchvision
 * jupyter
 * cuda 10.2
+
+It also provide a https user web interface by using jupyter server. You can access this development environment via https://< your public ip>:888
 
 ### HandsOn - Setup EMS instance
 1. Install python3 dependencies
@@ -101,3 +104,6 @@ For example I choosed **cs.gn5-c4g1.xlarge** from catalog, which has **1 * NVIDI
 ml@iZgw8hlwkk3wtun2uxt6pjZ:~$ nvidia-smi
 ```
 Specially for installing nvidia driver see: https://github.com/NVIDIA/ansible-role-nvidia-driver
+
+### More...
+Currently we can use stop_ecs_instance.py to stop instance without deleting intance's network settings like VSwitch, VPC ... These features should also be included as optins during the deleting process in the future.
