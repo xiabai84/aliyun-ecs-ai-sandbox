@@ -18,19 +18,19 @@ This script contains the newest version of tensorflow and pytorch.
 It also provide a https user web interface by using jupyter server. You can access this development environment via https://< your public ip>:8888
 
 ### HandsOn - Setup EMS instance
-1. Install python3 dependencies
+1 Install python3 dependencies
 Assume you already have virtualenvwrapper on your local machine.(https://virtualenvwrapper.readthedocs.io/en/latest/)
 ```
 mkvirtualenv ali-cloud
 workon ali-cloud
 pip install -r requirements.txt
 ```
-2. Setup basic configurations in Alibaba Cloud
+2 Setup basic configurations in Alibaba Cloud
 
 For remote access, you must generate ALIYUN_ACCESS_KEY_ID and ALIYUN_ACCESS_KEY_SECRET for your account. 
 See: https://www.alibabacloud.com/help/doc-detail/142101.htm
 
-3. Create ECS instance
+3 Create ECS instance
 
 Start init python script to create instance:
 
