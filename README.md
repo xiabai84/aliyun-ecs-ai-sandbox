@@ -2,24 +2,25 @@
 
 This is a automation script for building machine learning dev-environment on Alibaba Cloud, which is hosted in german region (Frankfurt am Main) by default setting.<br>
 
-I use python for creating ECS instance. There is a ansible-playbook for installing nvidia drivers, libs for deep learning with GPU support. This guide assumes you will use ubuntu 18.04, the playbook may need some editing if you're using other versions of ubuntu or linux... 
+I use python for creating ECS instance. There is also a ansible-playbook for installing nvidia drivers and deep learning libs with GPU support. This guide assumes you will use Ubuntu 18.04, the playbook may need some editing if you're using other versions of ubuntu or linux... 
 
 ### Deep Learning libraries
 
-This script contains the newest version of tensorflow and pytorch.
+The installation contains the newest version of tensorflow and pytorch.
 
-* tensorflow 2.1, 
+* tensorflow 2.1
 * tensorboard
 * pytorch 1.4 
 * torchvision
 * jupyter
 * cuda 10.2
 
-It also provide a https user web interface by using jupyter server. You can access this development environment via https://< your public ip>:8888
+Jupyter can provide a https user web interface by starting jupyter server. You can access this development environment via https://<your ecs public ip>:8888
 
 ### HandsOn - Setup EMS instance
-1 Install python3 dependencies
-Assume you already have virtualenvwrapper on your local machine.(https://virtualenvwrapper.readthedocs.io/en/latest/)
+1 Install python3 dependencies on your local machine
+Assume you already have python3 and virtualenvwrapper (https://virtualenvwrapper.readthedocs.io/en/latest/)
+
 ```
 mkvirtualenv ali-cloud
 workon ali-cloud
@@ -27,37 +28,40 @@ pip install -r requirements.txt
 ```
 2 Setup basic configurations in Alibaba Cloud
 
-For remote access, you must generate ALIYUN_ACCESS_KEY_ID and ALIYUN_ACCESS_KEY_SECRET for your account. 
+For remote access, you must generate ACCESS_KEY_ID and ACCESS_KEY_SECRET for your account. 
 See: https://www.alibabacloud.com/help/doc-detail/142101.htm
 
 3 Create ECS instance
 
-Start init python script to create instance:
+Start init python script and follow hints to create ECS instance:
 
 ```
 python setup_ecs_instance.py
 ```
-* Enter ACCESS_KEY_ID and ACCESS_KEY_SECRET. You can find them unter User Management -> Security Management
+* Enter ACCESS_KEY_ID and ACCESS_KEY_SECRET. You can find them unter Alibaba Cloud home page -> User Management -> Security Management
 
-* Choose region, where this instance should be started -> eu-central-1 is Frankfurt (Germany)
+* Choose region, where this instance should be started -> **eu-central-1** is the data center, which is hosted in Frankfurt (Germany)
 
-* Choose a instance type(hardware requirement). There are lots of available instance types. Because we want to achieve big work load in the cloud, I just contraint them to GPU instance. For example ecs.gn5-c4g1.xlarge. You can find detail description in their home page
+* Choose a instance type(hardware requirement). There are lots of available instance types. Because we always want to achieve big AI workload in the cloud, I contraint them to list GPU instance only For example ecs.gn5-c4g1.xlarge has NVIDIA P100 GPU. You can find detail description in their home page
 
-* Then select disks and zone settings... You can just enter default "y", if you don't really familiar with such cloud configurations.
+* Then select disks and zone settings... Just use my predefined default settings, if you don't really familiar with such cloud configurations.
 
-* For SecurityGroup I just use a basic configurations (http/https, ssh etc.) in order to access jupyter server web ui (port 8888)
+* For SecurityGroup I use a basic network configurations such as common http/https, ssh and jupyter server web ui (port 8888)
 
-* SSH KeyValue -> You need to generate your own id_rsa, id_rsa.pub and use id_rsa.pub for cloud KeyValue setting. For more information see https://www.alibabacloud.com/help/doc-detail/51793.html
+* SSH KeyValue -> You need to generate your own id_rsa, id_rsa.pub and use id_rsa.pub for cloud setting. These ssh-keys enable you can access your ECS instance from UNIX console. For more information see https://www.alibabacloud.com/help/doc-detail/51793.html
 
-* Choose base image for OS, all of installtion in the next steps are based on ubuntu_18_04_x64_20G_alibase_20200220.vhd image, so please use this one!
+* Choose Base-Image for OS, all of installtion in the next steps are based on ubuntu_18_04_x64_20G_alibase_20200220.vhd image, so please take this one
 
 * Charge Type: currently I only finished PayByTraffic option
 
 * Instance Charge Type: use PostPaid
 
-* For the rest just use default value
+* For the rest just leave default value
 
-#### Once it finished, you will see following message:
+#### Starting create ECS instance
+
+If your configurations are valid, you will see following message. That means, that Alibaba Cloud has received your request and start to create ECS instance.
+
 ```
     Creating instance with following params ...
     Region-ID: eu-central-1
@@ -81,10 +85,10 @@ python setup_ecs_instance.py
     Instance public ip: 47.91.22.33
 ```
 ### Check config.json file
-This python program will also generate or overwrite config.json, which stores informations for recreating instance. And it will also write the instance public ip address in "hosts" file (under playbook directory). ansible-playbook will use it to deploy everything you need automatically in your remote ECS instance.
+This python program will also generate or overwrite your local config.json file, which stores necessary informations for recreating instance. And it will also write your individual instance public ip address in "hosts" file (under playbook directory). ansible-playbook will use it to deploy everything you need automatically in your remote ECS instance.
 
 ### Setup your data science workbench with ansible-playbook
-My requirements.txt file contains ansible dependency, which means you can use command-line-tool ansible-playbook directly...
+The requirements.txt file contains ansible dependency, which means you can use command-line-tool ansible-playbook directly...
 1. Checking if ECS instance already exists
 
 ```
