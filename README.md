@@ -42,7 +42,8 @@ $ python setup_ecs_instance.py
 
 * Choose region, where this instance should be started -> **eu-central-1** is the data center, which is hosted in Frankfurt (Germany)
 
-* Choose a instance type(hardware requirement). There are lots of available instance types. Because we always want to achieve big AI workload in the cloud, I contraint them to list GPU instance only For example ecs.gn5-c4g1.xlarge has NVIDIA P100 GPU. You can find detail description in their home page
+* Choose a instance type(hardware requirement). There are lots of available instance types. Because we always want to achieve big AI workload in the cloud, I contraint them to list GPU instance only.
+For example **ecs.gn5-c4g1.xlarge** has **NVIDIA P100** GPU. For more information about this type of instance you can find them Alibaba Cloud home page
 
 * Then select disks and zone settings... Just use my predefined default settings, if you don't really familiar with such cloud configurations.
 
