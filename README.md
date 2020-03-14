@@ -103,15 +103,17 @@ $ ansible-playbook ecs-gpu-instance.yml
 ### Start jupyter notebook
 Once your ansible-playbook is finished, you should do following steps to start jupyter server:
 
-Login with 
+Login with ssh
 
 ```
-$ jupyter notebook password
-Enter password:  ****
-Verify password: ****
-
 $ ssh ml@(your ip)
 
+# set password for jupyter remote login
+$ jupyter notebook password
+  Enter password:  ****
+  Verify password: ****
+  
+# my ansible playbook has generated cert.pem and key.key for secured access
 $ ml@iZgw89wtwllnq3g945jw7iZ:~/.jupyter$ jupyter notebook --certfile=mycert.pem --keyfile mykey.key
 ```
 
@@ -125,4 +127,4 @@ $ ml@iZgw8hlwkk3wtun2uxt6pjZ:~$ nvidia-smi
 Specially for installing nvidia driver see: https://github.com/NVIDIA/ansible-role-nvidia-driver
 
 ### More...
-Currently we can use stop_ecs_instance.py to stop instance without deleting intance's network settings like VSwitch, VPC ... These features should also be included as optins during the deleting process in the future.
+Currently we can use stop_ecs_instance.py to stop instance without deleting intance's network settings like VSwitch, VPC ... Deleting of these features should also be included as optins in the future.
