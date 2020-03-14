@@ -22,9 +22,9 @@ Jupyter can provide a https user web interface by starting jupyter server. You c
 Assume you already have python3 and virtualenvwrapper (https://virtualenvwrapper.readthedocs.io/en/latest/)
 
 ```
-mkvirtualenv ali-cloud
-workon ali-cloud
-pip install -r requirements.txt
+$ mkvirtualenv ali-cloud
+$ workon ali-cloud
+$ pip install -r requirements.txt
 ```
 2 Setup basic configurations in Alibaba Cloud
 
@@ -36,7 +36,7 @@ See: https://www.alibabacloud.com/help/doc-detail/142101.htm
 Start init python script and follow hints to create ECS instance:
 
 ```
-python setup_ecs_instance.py
+$ python setup_ecs_instance.py
 ```
 * Enter ACCESS_KEY_ID and ACCESS_KEY_SECRET. You can find them unter Alibaba Cloud home page -> User Management -> Security Management
 
@@ -85,29 +85,34 @@ If your configurations are valid, you will see following message. That means, th
     Instance public ip: 47.91.22.33
 ```
 ### Check config.json file
-This python program will also generate or overwrite your local config.json file, which stores necessary informations for recreating instance. And it will also write your individual instance public ip address in "hosts" file (under playbook directory). ansible-playbook will use it to deploy everything you need automatically in your remote ECS instance.
+This python program will generate or overwrite your local config.json file, which stores necessary informations for recreating instance. And it will also write your individual instance public ip address in "hosts" file (under playbook directory). ansible-playbook will use it to deploy things automatically in your remote ECS instance.
 
 ### Setup your data science workbench with ansible-playbook
 The requirements.txt file contains ansible dependency, which means you can use command-line-tool ansible-playbook directly...
-1. Checking if ECS instance already exists
+
+1. Checking if ECS instance is accessible
 
 ```
-ansible all -m ping
+$ ansible all -m ping
 ```
 2. Install deep learning libraries
 ```
-ansible-playbook ecs-gpu-instance.yml
+$ ansible-playbook ecs-gpu-instance.yml
 ```
 
 ### Start jupyter notebook
-Once your ansible-playbook finished, you should do following steps to start jupyter server:
+Once your ansible-playbook is finished, you should do following steps to start jupyter server:
 
 Login with 
 
 ```
-ssh ml@(your ip)
+$ jupyter notebook password
+Enter password:  ****
+Verify password: ****
 
-ml@iZgw89wtwllnq3g945jw7iZ:~/.jupyter$ jupyter notebook --certfile=mycert.pem --keyfile mykey.key
+$ ssh ml@(your ip)
+
+$ ml@iZgw89wtwllnq3g945jw7iZ:~/.jupyter$ jupyter notebook --certfile=mycert.pem --keyfile mykey.key
 ```
 
 ### Extra
@@ -115,7 +120,7 @@ After running nvidia_driver playbook, please login in your remote ECS instance b
 <br>
 For example I choosed **cs.gn5-c4g1.xlarge** from catalog, which has **1 * NVIDIA P-100 GPU** processor and **1 * 16 GB GPU** memory:
 ```
-ml@iZgw8hlwkk3wtun2uxt6pjZ:~$ nvidia-smi
+$ ml@iZgw8hlwkk3wtun2uxt6pjZ:~$ nvidia-smi
 ```
 Specially for installing nvidia driver see: https://github.com/NVIDIA/ansible-role-nvidia-driver
 
