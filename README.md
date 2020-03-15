@@ -2,7 +2,7 @@
 
 This is a automation script for building machine learning dev-environment on Alibaba Cloud, which is hosted in german region (Frankfurt am Main) by default setting.<br>
 
-I use Alibaba Cloud python sdk for creating ECS instance (Terraform do actually the same thing). There is also a ansible-playbook for installing nvidia drivers and deep learning libs with GPU support. This guide assumes you will use Ubuntu 18.04, the playbook may need some editing if you're using other versions of ubuntu or linux... 
+In thi project I use Alibaba Cloud python sdk for creating ECS instance (actually Terraform can do the same thing). There is also a ansible-playbook for installing nvidia drivers and deep learning libs with GPU support. This guide assumes that you use Ubuntu 18.04, the playbook may need some editing if you're using other versions of ubuntu or linux... 
 
 ### Deep Learning libraries
 
@@ -39,18 +39,18 @@ Start init python script and follow hints to create ECS instance:
 ```
 $ python setup_ecs_instance.py
 ```
-* Enter ACCESS_KEY_ID and ACCESS_KEY_SECRET. You can find them unter Alibaba Cloud home page -> User Management -> Security Management
+* Enter ACCESS_KEY_ID and ACCESS_KEY_SECRET. You can find them unter Alibaba Cloud -> User Management -> Security Management
 
-* Choose region, where this instance should be started -> **eu-central-1** is the data center, which is hosted in Frankfurt (Germany)
+* Choose region, where this instance should be hosted -> **eu-central-1** is the EU data center, which is hosted in Frankfurt
 
-* Choose a instance type(hardware requirement). There are lots of available instance types. Because we always want to achieve big AI workload in the cloud, I contraint them to list GPU instance only.
-For example **ecs.gn5-c4g1.xlarge** has **NVIDIA P100** GPU. For more information about this type of instance you can find them Alibaba Cloud home page
+* Choose a instance type(hardware requirement). There are lots of available instance types. Because we always want to achieve big AI workload in the cloud with GPU, therefore I contraint them to only list GPU instances.
+For example **ecs.gn5-c4g1.xlarge** has **NVIDIA P100** GPU. For more information about this type of instance you can find them in Alibaba Home Page
 
 * Then select disks and zone settings... Just use my predefined default settings, if you don't really familiar with such cloud configurations.
 
 * For SecurityGroup I use a basic network configurations such as common http/https, ssh and jupyter server web ui (port 8888)
 
-* SSH KeyValue -> You need to generate your own id_rsa, id_rsa.pub and use id_rsa.pub for cloud setting. These ssh-keys enable you can access your ECS instance from UNIX console. For more information see https://www.alibabacloud.com/help/doc-detail/51793.html
+* SSH KeyValue -> You need to generate your own id_rsa, id_rsa.pub and use id_rsa.pub for cloud setting. These ssh-keys enable you can access your ECS instance from Unix console. For more information see https://www.alibabacloud.com/help/doc-detail/51793.html
 
 * Choose Base-Image for OS, all of installtion in the next steps are based on ubuntu_18_04_x64_20G_alibase_20200220.vhd image, so please take this one
 
@@ -65,26 +65,26 @@ For example **ecs.gn5-c4g1.xlarge** has **NVIDIA P100** GPU. For more informatio
 If your configurations are valid, you will see following message. That means, that Alibaba Cloud has received your request and start to create ECS instance.
 
 ```
-    Creating instance with following params ...
-    Region-ID: eu-central-1
-    InstanceName: ecs-ml-workstation
-    InstanceType : ecs.gn5-c4g1.xlarge
-    ZoneId : eu-central-1b
-    SecurityGroupId : sg-gw8##########
-    VSwitchId : vsw-gw89k0nq##########
-    KeyPairName : bai-mac
-    ImageId : ubuntu_18_04_x64_20G_alibase_20200220.vhd
-    InstanceName : ecs-ml-workstation
-    InternetChargeType : PayByTraffic
-    InternetMaxBandwidthOut : 25
-    InstanceChargeType : PostPaid
-    Period : 1
-    PeriodUnit : Hourly
-    Allocating public IP address ...
-    Attaching disks...
-    Instance public ip: 47.91.22.33
-    Starting ecs instance ...
-    Instance public ip: 47.91.22.33
+Creating instance with following params ...
+Region-ID: eu-central-1
+InstanceName: ecs-ml-workstation
+InstanceType : ecs.gn5-c4g1.xlarge
+ZoneId : eu-central-1b
+SecurityGroupId : sg-gw8##########
+VSwitchId : vsw-gw89k0nq##########
+KeyPairName : bai-mac
+ImageId : ubuntu_18_04_x64_20G_alibase_20200220.vhd
+InstanceName : ecs-ml-workstation
+InternetChargeType : PayByTraffic
+InternetMaxBandwidthOut : 25
+InstanceChargeType : PostPaid
+Period : 1
+PeriodUnit : Hourly
+Allocating public IP address ...
+Attaching disks...
+Instance public ip: 47.91.22.33
+Starting ecs instance ...
+Instance public ip: 47.91.22.33
 ```
 ### Check config.json file
 This python program will generate or overwrite your local config.json file, which stores necessary informations for recreating instance. And it will also write your individual instance public ip address in "hosts" file (under playbook directory). ansible-playbook will use it to deploy things automatically in your remote ECS instance.
@@ -129,4 +129,4 @@ $ ml@iZgw8hlwkk3wtun2uxt6pjZ:~$ nvidia-smi
 Specially for installing nvidia driver see: https://github.com/NVIDIA/ansible-role-nvidia-driver
 
 ### More...
-Currently we can use stop_ecs_instance.py to stop instance without deleting intance's network settings like VSwitch, VPC ... Deleting of these features should also be included as optins in the future.
+Currently we can use stop_ecs_instance.py to stop instance without deleting intance's network settings like VSwitch, VPC ... Deleting of these settings should also be included as optins in the future.
