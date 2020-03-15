@@ -2,7 +2,7 @@
 
 This is a automation script for building machine learning dev-environment on Alibaba Cloud, which is hosted in german region (Frankfurt am Main) by default setting.<br>
 
-In this project I use Alibaba Cloud python sdk for creating ECS instance (actually Terraform can do the same thing). There is also a ansible-playbook for installing nvidia drivers and deep learning libs with GPU support. This guide assumes that you use Ubuntu 18.04, the playbook may need some editing if you're using other versions of ubuntu or linux... 
+In this project I use low level Alibaba Cloud Python SDK for creating ECS instance (actually Terraform can do the same thing). There is also a ansible-playbook for installing nvidia drivers and deep learning libs with GPU support. This guide assumes that you use Ubuntu 18.04, the playbook may need some editing if you're using other versions of ubuntu or linux... 
 
 ### Deep Learning libraries
 
