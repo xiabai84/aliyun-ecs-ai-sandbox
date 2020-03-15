@@ -15,7 +15,7 @@ The installation contains the newest version of tensorflow and pytorch.
 * jupyter
 * cuda 10.2
 
-Jupyter can provide a https user web interface by starting jupyter server. You can access this development environment via https://<your ecs public ip>:8888
+Jupyter can provide a https user web interface by starting jupyter server. You can access this development environment via https://< your ecs public ip >:8888
 
 ### HandsOn - Setup EMS instance
 1 Install python3 dependencies
