@@ -129,4 +129,6 @@ $ ml@iZgw8hlwkk3wtun2uxt6pjZ:~$ nvidia-smi
 Specially for installing nvidia driver see: https://github.com/NVIDIA/ansible-role-nvidia-driver
 
 ### More...
-Currently we can use stop_ecs_instance.py to stop instance without deleting intance's network settings like VSwitch, VPC ... Deleting of these settings should also be included as optins in the future.
+Currently we can use stop_ecs_instance.py to stop instance without deleting intance's network settings like VSwitch, VPC ... 
+Deleting of these settings should also be included as optins in the future.
+To avoid to spend money for such service, you should delete them manually and check after deleting carefully!
