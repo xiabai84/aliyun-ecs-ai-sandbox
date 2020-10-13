@@ -1,11 +1,12 @@
 ---
-- hosts: all
+- hosts: "localhost"
+  connection: "local"
   become: true
   become_method: sudo
   tasks:
     - import_role:
         name: tools
-    - import_role:
-        name: nvidia_driver
+    #- import_role:
+    #    name: nvidia_driver
     - import_role:
         name: libs

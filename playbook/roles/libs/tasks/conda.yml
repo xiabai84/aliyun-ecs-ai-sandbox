@@ -3,34 +3,34 @@
   stat:
     path: '{{ conda_directory }}'
   register: installed
-  become_user: ml
+  become_user: wsl
 
 - name: Check if Miniconda is downloaded
   stat:
-    path: /mnt/ml/cache/conda3.sh
+    path: /mnt/wsl/cache/conda3.sh
   register: downloaded
-  become_user: ml
+  become_user: wsl
 
 - name: Download Miniconda3 installer
   get_url: 
     url: https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    dest: /mnt/ml/cache/conda3.sh
+    dest: /mnt/wsl/cache/conda3.sh
     checksum: sha256:957d2f0f0701c3d1335e3b39f235d197837ad69a944fa6f5d8ad2c686b69df3b
-  become_user: ml
+  become_user: wsl
   when: downloaded.stat.exists == False
 
 - name: Install Miniconda3
-  shell: 'bash /mnt/ml/cache/conda3.sh -b -p {{ conda_directory }}'
-  become_user: ml
+  shell: 'bash /mnt/wsl/cache/conda3.sh -b -p {{ conda_directory }}'
+  become_user: wsl
   when: installed.stat.exists == False
 
 - name: Add Miniconda3 to the PATH
   lineinfile: dest=~/.bashrc line="export PATH={{ conda_directory }}/bin:$PATH"
-  become_user: ml
+  become_user: wsl
 
 - name: Update Miniconda3b
   shell: '{{ conda_directory }}/bin/conda update conda -y --force'
-  become_user: ml
+  become_user: wsl
 
 - name: Check if a py36 env is installed
   stat:

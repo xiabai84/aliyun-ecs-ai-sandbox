@@ -97,9 +97,9 @@ The requirements.txt file contains ansible dependency, which means you can use c
 ```
 $ ansible all -m ping
 ```
-2. Install deep learning libraries
+2. Install deep learning libraries (need to provide password here)
 ```
-$ ansible-playbook ecs-gpu-instance.yml
+$ ansible-playbook -c local -i localhost, ecs-gpu-instance.yml  --ask-become-pass
 ```
 
 ### Start jupyter notebook

@@ -1,20 +1,20 @@
 - name: Check if cudnn is downloaded -> register a user by nvidia is required TBD
   stat:
-    path: /mnt/ml/cache/libcudnn7.deb
+    path: /mnt/wsl/cache/libcudnn7.deb
   register: downloaded
-  become_user: ml
+  become_user: wsl
 
 - name: Install cudnn -> skip by default
-  apt: deb="/mnt/ml/cache/libcudnn7.deb"
+  apt: deb="/mnt/wsl/cache/libcudnn7.deb"
   become: false
   when: downloaded.stat.exists == True
 
 - name: Install cudnn-dev -> skip by default
-  apt: deb="/mnt/ml/cache/libcudnn7-dev.deb"
+  apt: deb="/mnt/wsl/cache/libcudnn7-dev.deb"
   become: false
   when: downloaded.stat.exists == True
 
 - name: Install cudnn-doc -> skip by default
-  apt: deb="/mnt/ml/cache/libcudnn7-doc.deb"
+  apt: deb="/mnt/wsl/cache/libcudnn7-doc.deb"
   become: false
   when: downloaded.stat.exists == True

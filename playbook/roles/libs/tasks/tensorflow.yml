@@ -1,8 +1,8 @@
 ---
 - name: Install tensorflow with GPU and CPU
   shell: '{{conda_directory}}/bin/pip install tensorflow'
-  become_user: ml
+  become_user: wsl
 
 - name: Install tensorboard
   shell: '{{conda_directory}}/bin/pip install tensorboard'
-  become_user: ml
+  become_user: wsl

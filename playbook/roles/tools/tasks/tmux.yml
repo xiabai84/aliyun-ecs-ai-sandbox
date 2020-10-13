@@ -2,6 +2,12 @@
   apt: pkg=tmux state=present
 
 - name: Copy tmux conf
-  copy: src=.tmux.conf dest=~/
-  become: yes
-  become_user: ml
+  become: true
+  become_user: root
+  copy:
+    src: .tmux.conf
+    dest: ~/
+    owner: wsl
+    group: wsl
+    mode: 0775
+    backup: yes

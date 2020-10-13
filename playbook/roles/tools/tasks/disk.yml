@@ -1,60 +1,28 @@
-- name: Create a partition on /vdb
-  parted:
-    device: /dev/vdb
-    number: 1
-    state: present
-
-- name: Create a file system if the device /vdb does not have one
-  filesystem:
-    dev:  /dev/vdb1
-    fstype: ext4
-
-- name: Mount external drive
-  mount:
-    path:  /mnt/data
-    src:  /dev/vdb1
-    fstype: ext4
-    state: mounted
-
-- name: Change mounted directory owner
+- name: Creates data directory on /mnt/data
   file:
-    path:  /mnt/data
-    owner: ml
-    group: ml
+    path: /mnt/data
+    state: directory
+    owner: wsl
+    group: wsl
+    mode: 0775
     recurse: yes
 
-- name: Create a partition on /vdc
-  parted:
-    device: /dev/vdc
-    number: 1
-    state: present
-
-- name: Create a file system if the device /vdc does not have one
-  filesystem:
-    dev:  /dev/vdc1
-    fstype: ext4
-
-- name: Mount external drive
-  mount:
-    path:  /mnt/ml
-    src:  /dev/vdc1
-    fstype: ext4
-    state: mounted
-
-- name: Change mounted directory owner
+- name: Creates data directory on /mnt/wsl 
   file:
-    path:  /mnt/ml
-    owner: ml
-    group: ml
+    path: /mnt/wsl
+    state: directory
+    owner: wsl
+    group: wsl
+    mode: 0775
     recurse: yes
 
 - name: Create common directories
   file:
     path:  "{{ item }}"
     state: directory
-    owner: ml
-    group: ml
+    owner: wsl
+    group: wsl
   with_items:
-    - /mnt/ml/cache
-    - /mnt/ml/libs
-    - /mnt/ml/working
+    - /mnt/wsl/cache
+    - /mnt/wsl/libs
+    - /mnt/wsl/working

@@ -1,0 +1,55 @@
+- name: Create a non root user(wsl)
+  user:
+    name: wsl
+    shell: /bin/bash
+    append: yes
+
+- name: Allow wsl to have passwordless sudo
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    line: 'wsl ALL=(ALL) NOPASSWD: ALL'
+
+- name: Create .ssh folder
+  file:
+    path: ~wsl/.ssh
+    state: directory
+    owner: wsl
+    group: wsl
+    mode: 0700
+
+
+- name: Set authorized key
+  authorized_key:
+    user: wsl
+    state: present
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+
+- name: Copy SSH public key
+  become: true
+  become_user: root
+  copy:
+    src: id_rsa.pub
+    dest: ~/.ssh/
+    owner: wsl
+    group: wsl
+    mode: 0600
+    backup: yes
+
+- name: Copy SSH private key
+  become: true
+  become_user: root
+  copy:
+    src: id_rsa
+    dest: ~/.ssh/
+    owner: wsl
+    group: wsl
+    mode: 0600
+    backup: yes
+
+- name: "Allow admin users to sudo without a password"
+  lineinfile:
+    dest: "/etc/sudoers" # path: in version 2.3
+    state: "present"
+    regexp: "^%admin"
+    line: "%admin ALL=(ALL) NOPASSWD: ALL"

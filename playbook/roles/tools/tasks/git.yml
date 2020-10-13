@@ -3,7 +3,7 @@
 
 - name: Add git alias
   become: yes
-  become_user: ml
+  become_user: wsl
   git_config:
     name: alias.{{item.alias}}
     scope: global
