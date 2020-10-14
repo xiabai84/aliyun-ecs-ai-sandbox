@@ -2,12 +2,17 @@
 
 ### Scope
 
-With this reusable Playbook it should install common libs automatically in a Windows-WSL environment.
+With this reusable playbook it should install common libs automatically on your local windows-wsl environment.
 
 ### Requirement
 
 * WSL2 environment
+* root password (playbook will run as a root user)
 * ansible version: 2.9.6 (you can install it by using python-pip3)
+
+### install docker-ce
+
+### install openjdk-11
 
 ### install deep learning libs
 
@@ -19,7 +24,7 @@ The installation contains the newest version of tensorflow and pytorch.
 * torchvision
 * jupyter
 
-Jupyter can provide a https user web interface by starting jupyter server. You can access this development environment via https://< your ecs public ip >:8888
+Jupyter can provide a https user web interface by starting jupyter server. You can access this development environment via https://localhost:8888
 
 ### HandsOn - Setup WSL Env
 
@@ -31,9 +36,9 @@ The requirements.txt file contains ansible dependency, which means you can use c
 ```
 $ ansible all -m ping
 ```
-2. Install deep learning libraries (need to provide password here)
+2. Begin installation (need to provide password here)
 ```
-$ ansible-playbook -c local -i localhost, setup-wsl-instance.yml  --ask-become-pass
+$ ansible-playbook -c local -i localhost, setup-wsl-instance.yml --ask-become-pass
 ```
 
 ### Start jupyter notebook
@@ -42,7 +47,7 @@ Once your ansible-playbook is finished, you should do following steps to start j
 Login with ssh
 
 ```
-$ ssh wsl@(your ip)
+$ su wsl
 
 # set password for jupyter remote login
 $ jupyter notebook password
@@ -50,8 +55,19 @@ $ jupyter notebook password
   Verify password: ****
   
 # my ansible playbook has generated cert.pem and key.key for secured access
-$ wsl@iZgw89wtwllnq3g945jw7iZ:~/.jupyter$ jupyter notebook --certfile=mycert.pem --keyfile mykey.key
+$ wsl@DESKTOP-LUMRQMO:~/.jupyter$ jupyter notebook --certfile=mycert.pem --keyfile mykey.key
 ```
 
 ### Extra Delete User and ansible generated files
-TBD
+Delete user wsl (need to provide password here). 
+
+It will also clean the following directories...
+```
+/mnt/data
+/mnt/wsl
+/home/wsl
+```
+
+```
+$ ansible-playbook -c local -i localhost, delete_wsl_user.yml --ask-become-pass
+```

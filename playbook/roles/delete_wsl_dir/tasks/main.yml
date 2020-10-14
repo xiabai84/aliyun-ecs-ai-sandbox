@@ -1,0 +1,16 @@
+---
+- name: Clean /mnt/data path
+  file:
+    state: absent
+    path: "/mnt/data/"
+
+- name: Clean /mnt/data path
+  file:
+    state: absent
+    path: "/mnt/wsl/"
+
+- name: Remove the user 'wsl'
+  user:
+    name: wsl
+    state: absent
+    remove: yes

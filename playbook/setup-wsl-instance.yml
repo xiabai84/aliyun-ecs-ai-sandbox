@@ -5,6 +5,10 @@
   become_method: sudo
   tasks:
     - import_role:
-        name: tools
+        name: sysconfig
     - import_role:
-        name: libs
+        name: pylibs
+    - import_role:
+        name: jdk
+    - import_role:
+        name: docker

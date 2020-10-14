@@ -3,8 +3,7 @@
   stat:
     path: '{{ conda_directory }}'
   register: installed
-  become_user: root
-  become: true
+  become_user: wsl
 
 - name: Check if Miniconda is downloaded
   stat:
@@ -37,15 +36,15 @@
   stat:
     path: '{{ conda_directory }}/envs/py36'
   register: py36
-  become: false
+  become_user: wsl
 
 - name: Create Miniconda3 python 3.6 env
   shell: '{{ conda_directory }}/bin/conda create -y -n py36 python=3.6 anaconda'
-  become: false
+  become_user: wsl
   when: py36.stat.exists == False
 
 - name: Upgrading setuptools
   shell: '/usr/bin/yes | {{ conda_directory }}/envs/py36/bin/pip install -q --upgrade setuptools'
   ignore_errors: yes
-  become: false
+  become_user: wsl
   when: py36.stat.exists == False
