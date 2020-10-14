@@ -6,7 +6,5 @@
   tasks:
     - import_role:
         name: tools
-    #- import_role:
-    #    name: nvidia_driver
     - import_role:
         name: libs

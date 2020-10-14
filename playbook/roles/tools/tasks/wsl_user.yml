@@ -1,8 +1,16 @@
-- name: Create a non root user(wsl)
+- name: Ensure group "wsl" exists with correct gid
+  group:
+    name: wsl
+    state: present
+    gid: 1750
+
+- name: Add the user 'wsl' with a specific uid, initial passwd and a primary group of 'wsl'
   user:
     name: wsl
     shell: /bin/bash
-    append: yes
+    comment: create new wsl user
+    uid: 1040
+    group: wsl
 
 - name: Allow wsl to have passwordless sudo
   lineinfile:

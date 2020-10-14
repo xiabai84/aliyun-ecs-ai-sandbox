@@ -1,3 +1,13 @@
+
+- name: Creates ansible tmp directory for wsl user
+  file:
+    path: /home/wsl/.ansible/tmp
+    state: directory
+    owner: wsl
+    group: wsl
+    mode: 0775
+    recurse: yes
+
 - name: Creates data directory on /mnt/data
   file:
     path: /mnt/data
@@ -22,6 +32,7 @@
     state: directory
     owner: wsl
     group: wsl
+    mode: 0775
   with_items:
     - /mnt/wsl/cache
     - /mnt/wsl/libs
