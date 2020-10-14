@@ -10,6 +10,16 @@ With this reusable playbook it should install common libs automatically on your 
 * root password (playbook will run as a root user)
 * ansible version: 2.9.6 (you can install it by using python-pip3)
 
+If you don't have python3 and pip installed on your wsl ubuntu system yet:
+
+```
+$ sudo apt-get install python3.6
+$ sudo apt install python3-pip
+$ pip install ansible==2.9.6
+
+now you are ready to run ansible playbook
+```
+
 ### install docker-ce
 
 ### install openjdk-11
