@@ -1,5 +1,7 @@
 ---
 - hosts: "localhost"
+  vars:
+    wsl_user: xiabai84
   connection: "local"
   become: true
   become_method: sudo

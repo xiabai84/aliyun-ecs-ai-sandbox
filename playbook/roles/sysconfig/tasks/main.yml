@@ -1,5 +1,5 @@
 ---
- - { import_tasks: wsl_user.yml, tags: 'wsl_user' }
+ #- { import_tasks: wsl_user.yml, tags: 'wsl_user' }
  - { import_tasks: disk.yml, tags: 'disk' }
  - { import_tasks: utils.yml, tags: 'utils' }
  - { import_tasks: tmux.yml, tags: 'tmux' }

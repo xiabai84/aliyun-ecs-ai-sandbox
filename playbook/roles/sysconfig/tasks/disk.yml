@@ -1,10 +1,10 @@
-
-- name: Creates ansible tmp directory for wsl user
+---
+- name: Creates ansible tmp directory for '{{ wsl_user }}' user
   file:
-    path: /home/wsl/.ansible/tmp
+    path: '/home/{{ wsl_user }}/.ansible/tmp'
     state: directory
-    owner: wsl
-    group: wsl
+    owner: '{{ wsl_user }}'
+    group: '{{ wsl_user }}'
     mode: 0775
     recurse: yes
 
@@ -12,17 +12,17 @@
   file:
     path: /mnt/data
     state: directory
-    owner: wsl
-    group: wsl
+    owner: '{{ wsl_user }}'
+    group: '{{ wsl_user }}'
     mode: 0775
     recurse: yes
 
-- name: Creates data directory on /mnt/wsl 
+- name: Creates data directory on /mnt/'{{ wsl_user }}' 
   file:
-    path: /mnt/wsl
+    path: '/mnt/{{ wsl_user }}'
     state: directory
-    owner: wsl
-    group: wsl
+    owner: '{{ wsl_user }}'
+    group: '{{ wsl_user }}'
     mode: 0775
     recurse: yes
 
@@ -30,10 +30,10 @@
   file:
     path:  "{{ item }}"
     state: directory
-    owner: wsl
-    group: wsl
+    owner: '{{ wsl_user }}'
+    group: '{{ wsl_user }}'
     mode: 0775
   with_items:
-    - /mnt/wsl/cache
-    - /mnt/wsl/libs
-    - /mnt/wsl/working
+    - '/mnt/{{ wsl_user }}/cache'
+    - '/mnt/{{ wsl_user }}/libs'
+    - '/mnt/{{ wsl_user }}/working'

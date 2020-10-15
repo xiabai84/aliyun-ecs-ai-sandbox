@@ -7,7 +7,7 @@
   copy:
     src: .tmux.conf
     dest: ~/
-    owner: wsl
-    group: wsl
+    owner: '{{ wsl_user }}'
+    group: '{{ wsl_user }}'
     mode: 0775
     backup: yes

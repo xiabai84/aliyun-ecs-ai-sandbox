@@ -20,6 +20,18 @@ $ pip install ansible==2.9.6
 now you are ready to run ansible playbook
 ```
 
+### playbook settings
+
+Setting ownership of installation by using vars in setup-wsl-instance.yml file.
+
+```
+- hosts: "localhost"
+  vars:
+    wsl_user: xiabai84
+```
+
+This means, that all installation related packages and files belong to wsl-default-user "xiabai84" in my case. This is a important setting in WSL env, because only this user has certain privilege for interacting with windows host system. If use other linux user instead default-user, it could have problems with opening or creating tmp-files...
+
 ### install docker-ce
 
 ### install openjdk-11

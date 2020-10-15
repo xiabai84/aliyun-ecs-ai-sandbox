@@ -1,2 +1,2 @@
-conda_directory: /mnt/wsl/libs/anaconda3
+conda_directory: /mnt/{{ wsl_user }}/libs/anaconda3
 conda_binary: "{{conda_directory}}/bin/conda"

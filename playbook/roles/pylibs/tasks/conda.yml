@@ -3,48 +3,48 @@
   stat:
     path: '{{ conda_directory }}'
   register: installed
-  become_user: wsl
+  become_user: '{{ wsl_user }}'
 
 - name: Check if Miniconda is downloaded
   stat:
-    path: /mnt/wsl/cache/conda3.sh
+    path: '/mnt/{{ wsl_user }}/cache/conda3.sh'
   register: downloaded
-  become_user: wsl
+  become_user: '{{ wsl_user }}'
 
 - name: Download Miniconda3 installer
   get_url: 
     url: https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    dest: /mnt/wsl/cache/conda3.sh
+    dest: '/mnt/{{ wsl_user }}/cache/conda3.sh'
     checksum: md5:d63adf39f2c220950a063e0529d4ff74
-  become_user: wsl
+  become_user: '{{ wsl_user }}'
   when: downloaded.stat.exists == False
 
 - name: Install Miniconda3
-  shell: 'bash /mnt/wsl/cache/conda3.sh -b -p {{ conda_directory }}'
-  become_user: wsl
+  shell: 'bash /mnt/{{ wsl_user }}/cache/conda3.sh -b -p {{ conda_directory }}'
+  become_user: '{{ wsl_user }}'
   when: installed.stat.exists == False
 
 - name: Add Miniconda3 to the PATH
   lineinfile: dest=~/.bashrc line="export PATH={{ conda_directory }}/bin:$PATH"
-  become_user: wsl
+  become_user: '{{ wsl_user }}'
 
 - name: Update Miniconda3b
   shell: '{{ conda_directory }}/bin/conda update conda -y --force'
-  become_user: wsl
+  become_user: '{{ wsl_user }}'
 
 - name: Check if a py36 env is installed
   stat:
     path: '{{ conda_directory }}/envs/py36'
   register: py36
-  become_user: wsl
+  become_user: '{{ wsl_user }}'
 
 - name: Create Miniconda3 python 3.6 env
   shell: '{{ conda_directory }}/bin/conda create -y -n py36 python=3.6 anaconda'
-  become_user: wsl
+  become_user: '{{ wsl_user }}'
   when: py36.stat.exists == False
 
 - name: Upgrading setuptools
   shell: '/usr/bin/yes | {{ conda_directory }}/envs/py36/bin/pip install -q --upgrade setuptools'
   ignore_errors: yes
-  become_user: wsl
+  become_user: '{{ wsl_user }}'
   when: py36.stat.exists == False
