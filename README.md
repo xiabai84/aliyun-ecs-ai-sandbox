@@ -34,7 +34,6 @@ $ pip install ansible==2.9.6
 
 now you are ready to run ansible playbook
 
-```
 
 ### playbook settings
 
