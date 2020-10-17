@@ -15,9 +15,25 @@ If you don't have python3 and pip installed on your wsl ubuntu system yet:
 ```
 $ sudo apt-get install python3.6
 $ sudo apt install python3-pip
+```
+
+配置下 .bashrc 环境变量
+
+```
+alias python=python3
+alias pip=pip3
+export ANSIBLE_HOME='/home/xiabai84/.local'
+export PATH=$PATH:$ANSIBLE_HOME/bin
+```
+
+安装 ansible
+
+```
 $ pip install ansible==2.9.6
+```
 
 now you are ready to run ansible playbook
+
 ```
 
 ### playbook settings
