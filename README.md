@@ -4,6 +4,8 @@
 
 With this reusable playbook it should install common libs automatically on your local windows-wsl environment.
 
+There is still some hardcode in the scripts...TBD
+
 ### Requirement
 
 * WSL2 environment
@@ -17,7 +19,7 @@ $ sudo apt-get install python3.6
 $ sudo apt install python3-pip
 ```
 
-配置下 .bashrc 环境变量
+Configure .bashrc env variables
 
 ```
 alias python=python3
@@ -26,7 +28,7 @@ export ANSIBLE_HOME='/home/xiabai84/.local'
 export PATH=$PATH:$ANSIBLE_HOME/bin
 ```
 
-安装 ansible
+Install ansible
 
 ```
 $ pip install ansible==2.9.6
